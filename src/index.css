@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Crimson+Text:wght@400;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%; /* Much darker - was 200 15% 25% */
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%; /* Much darker */
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%; /* Much darker */
+
+    --primary: 327 73% 44%; /* Your magenta #C21890 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 330 86% 30%; /* Your deep purple #880E4F */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 35%; /* Much darker - was 200 10% 45% */
+
+    --accent: 327 92% 94%; /* Light magenta */
+    --accent-foreground: 327 73% 44%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 327 73% 44%;
+
+    --radius: 0.75rem;
+
+    /* Custom design tokens */
+    --warm-cream: 28 40% 98%;
+    --soft-teal: 180 35% 45%;
+    --sage-green: 140 30% 65%;
+    --warm-coral: 15 85% 70%;
+    --deep-navy: 222 47% 11%; /* Darker */
+    --light-sage: 150 20% 95%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, #C21890, #E7299F);
+    --gradient-warm: linear-gradient(135deg, hsl(15 85% 70%), hsl(28 50% 85%));
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px rgba(194, 24, 144, 0.15);
+    --shadow-medium: 0 8px 30px -6px rgba(194, 24, 144, 0.25);
+    
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 15%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 15%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 327 73% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 330 86% 40%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 327 73% 25%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 20%;
+    --input: 217 33% 20%;
+    --ring: 327 73% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+    font-weight: 700;
+    color: hsl(222 47% 11%);
+  }
+
+  p, span, div, li, label {
+    color: hsl(215 16% 35%);
+    font-weight: 400;
+  }
+
+  strong, b {
+    font-weight: 600;
+    color: hsl(222 47% 11%);
+  }
+
+  /* Make muted text darker */
+  .text-muted-foreground {
+    color: hsl(215 16% 35%) !important;
+  }
+
+  /* Make primary text fully opaque */
+  .text-primary {
+    color: hsl(327 73% 44%) !important;
+  }
+
+  /* Ensure all text is crisp */
+  .text-foreground {
+    color: hsl(222 47% 11%) !important;
+  }
+}
+
+@layer utilities {
+  .gradient-primary {
+    background: linear-gradient(135deg, #C21890, #E7299F);
+  }
+  
+  .gradient-warm {
+    background: var(--gradient-warm);
+  }
+  
+  .shadow-soft {
+    box-shadow: 0 4px 20px -4px rgba(194, 24, 144, 0.15);
+  }
+  
+  .shadow-medium {
+    box-shadow: 0 8px 30px -6px rgba(194, 24, 144, 0.25);
+  }
+  
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+}
