@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Facebook, Instagram, Twitter, Linkedin, MessageCircle } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Instagram, Twitter, Linkedin, MessageCircle, Youtube } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -52,6 +52,17 @@ const Footer = () => {
                 aria-label="Instagram"
               >
                 <Instagram className="h-5 w-5" />
+              </a>
+
+              {/*Youtube */}
+              <a
+                href="https://youtube.com/@familymidwife-ke8002?si=fI0_YseQh9nbOK44"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-primary/10 hover:bg-primary text-primary hover:text-white transition-all duration-300 hover:scale-110 hover:shadow-lg flex items-center justify-center"
+                aria-label="Facebook"
+              >
+                <Youtube className="h-5 w-5" />
               </a>
             </div>
           </div>

@@ -15,10 +15,14 @@ import {
   AlertCircle,
   Heart,
   FileText,
-  MessageSquare
+  MessageSquare,
+  Loader2
 } from "lucide-react";
+import { api } from "@/services/api";
+import { toast } from "sonner";
 
 const Booking = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -39,13 +43,13 @@ const Booking = () => {
   });
 
   const serviceTypes = [
-    "Antenatal Care & Follow-Up",
-    "Consultations",
-    "Partner Health Support",
-    "Postpartum Care & Follow-Up",
-    "Preconception Care",
-    "Preparation for Labor & Delivery",
-    "Teenage Empowerment & Reproductive Education",
+    { key: "antenatal", label: "Antenatal Care & Follow-Up" },
+    { key: "consultations", label: "Consultations" },
+    { key: "partner_health", label: "Partner Health Support" },
+    { key: "postpartum", label: "Postpartum Care & Follow-Up" },
+    { key: "preconception", label: "Preconception Care" },
+    { key: "labor_prep", label: "Preparation for Labor & Delivery" },
+    { key: "teenage", label: "Teenage Empowerment & Reproductive Education" },
   ];
 
   const timeSlots = [
@@ -59,10 +63,63 @@ const Booking = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  function convertTo24Hour(time12h: string) {
+    const [time, modifier] = time12h.split(' ');
+    let [hours, minutes] = time.split(':').map(Number);
+
+    if (modifier === 'PM' && hours < 12) hours += 12;
+    if (modifier === 'AM' && hours === 12) hours = 0;
+
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Booking submitted:", formData);
-    // Add your form submission logic here
+    setIsSubmitting(true);
+
+    try {
+      const payload = {
+        ...formData,
+        preferredTime: formData.preferredTime
+          ? convertTo24Hour(formData.preferredTime)
+          : null
+      };
+
+      const response = await api.submitBooking(payload);
+      
+      toast.success(
+        response.message || 'Booking submitted successfully! We will contact you within 24 hours.',
+        { duration: 6000 }
+      );
+
+      // Reset form
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        address: "",
+        serviceType: "",
+        preferredDate: "",
+        preferredTime: "",
+        dueDate: "",
+        weeksPregnant: "",
+        previousPregnancies: "",
+        medicalConditions: "",
+        currentMedications: "",
+        additionalNotes: "",
+        emergencyContactName: "",
+        emergencyContactPhone: "",
+      });
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Failed to submit booking. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -77,7 +134,7 @@ const Booking = () => {
             <h1 className="font-serif text-4xl md:text-5xl font-bold mb-6">
               Schedule Your Consultation
             </h1>
-            <p className="text-lg text-muted-foreground mb-8">
+            <p className="text-lg text-foreground mb-8">
               Take the first step towards personalized maternal care. Fill out the form below and we'll get back to you within 24 hours to confirm your appointment.
             </p>
             
@@ -127,6 +184,7 @@ const Booking = () => {
                         onChange={handleChange}
                         placeholder="Jane"
                         required
+                        disabled={isSubmitting}
                         className="h-12"
                       />
                     </div>
@@ -141,6 +199,7 @@ const Booking = () => {
                         onChange={handleChange}
                         placeholder="Kimani"
                         required
+                        disabled={isSubmitting}
                         className="h-12"
                       />
                     </div>
@@ -160,6 +219,7 @@ const Booking = () => {
                         onChange={handleChange}
                         placeholder="jane@example.com"
                         required
+                        disabled={isSubmitting}
                         className="h-12"
                       />
                     </div>
@@ -176,6 +236,7 @@ const Booking = () => {
                         onChange={handleChange}
                         placeholder="+254700000000"
                         required
+                        disabled={isSubmitting}
                         className="h-12"
                       />
                     </div>
@@ -193,6 +254,7 @@ const Booking = () => {
                       onChange={handleChange}
                       placeholder="Street address, city"
                       required
+                      disabled={isSubmitting}
                       className="h-12"
                     />
                   </div>
@@ -219,12 +281,13 @@ const Booking = () => {
                       value={formData.serviceType}
                       onChange={handleChange}
                       required
-                      className="w-full h-12 px-4 rounded-md border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                      disabled={isSubmitting}
+                      className="w-full h-12 px-4 rounded-md border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <option value="">Select a service...</option>
                       {serviceTypes.map((service) => (
-                        <option key={service} value={service}>
-                          {service}
+                        <option key={service.key} value={service.key}>
+                          {service.label}
                         </option>
                       ))}
                     </select>
@@ -243,6 +306,7 @@ const Booking = () => {
                         value={formData.preferredDate}
                         onChange={handleChange}
                         required
+                        disabled={isSubmitting}
                         className="h-12"
                         min={new Date().toISOString().split('T')[0]}
                       />
@@ -258,7 +322,8 @@ const Booking = () => {
                         value={formData.preferredTime}
                         onChange={handleChange}
                         required
-                        className="w-full h-12 px-4 rounded-md border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                        disabled={isSubmitting}
+                        className="w-full h-12 px-4 rounded-md border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <option value="">Select time...</option>
                         {timeSlots.map((time) => (
@@ -293,6 +358,7 @@ const Booking = () => {
                         type="date"
                         value={formData.dueDate}
                         onChange={handleChange}
+                        disabled={isSubmitting}
                         className="h-12"
                       />
                     </div>
@@ -307,6 +373,7 @@ const Booking = () => {
                         value={formData.weeksPregnant}
                         onChange={handleChange}
                         placeholder="e.g., 12"
+                        disabled={isSubmitting}
                         className="h-12"
                         min="0"
                         max="42"
@@ -324,6 +391,7 @@ const Booking = () => {
                       value={formData.previousPregnancies}
                       onChange={handleChange}
                       placeholder="e.g., First pregnancy, or 2 previous births"
+                      disabled={isSubmitting}
                       className="h-12"
                     />
                   </div>
@@ -339,6 +407,7 @@ const Booking = () => {
                       onChange={handleChange}
                       placeholder="Please list any medical conditions we should be aware of..."
                       rows={3}
+                      disabled={isSubmitting}
                       className="resize-none"
                     />
                   </div>
@@ -354,6 +423,7 @@ const Booking = () => {
                       onChange={handleChange}
                       placeholder="List any medications you're currently taking..."
                       rows={3}
+                      disabled={isSubmitting}
                       className="resize-none"
                     />
                   </div>
@@ -382,6 +452,7 @@ const Booking = () => {
                         onChange={handleChange}
                         placeholder="Full name"
                         required
+                        disabled={isSubmitting}
                         className="h-12"
                       />
                     </div>
@@ -397,6 +468,7 @@ const Booking = () => {
                         onChange={handleChange}
                         placeholder="+254700000000"
                         required
+                        disabled={isSubmitting}
                         className="h-12"
                       />
                     </div>
@@ -421,6 +493,7 @@ const Booking = () => {
                     onChange={handleChange}
                     placeholder="Share any questions, concerns, or special requirements..."
                     rows={5}
+                    disabled={isSubmitting}
                     className="resize-none"
                   />
                 </CardContent>
@@ -431,8 +504,8 @@ const Booking = () => {
                 <CardContent className="pt-6">
                   <div className="flex items-start gap-3">
                     <CheckCircle className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
-                    <div className="space-y-2 text-sm text-muted-foreground">
-                      <p className="font-semibold text-foreground">Before you submit:</p>
+                    <div className="space-y-2 text-sm text-foreground">
+                      <p className="font-semibold">Before you submit:</p>
                       <ul className="space-y-1 list-disc list-inside">
                         <li>We'll confirm your appointment within 24 hours</li>
                         <li>You'll receive a confirmation email with appointment details</li>
@@ -450,23 +523,34 @@ const Booking = () => {
                 <Button
                   type="submit"
                   size="lg"
-                  className="bg-primary hover:bg-primary/90 text-white px-12 h-14 text-lg"
+                  disabled={isSubmitting}
+                  className="bg-primary hover:bg-primary/90 text-white px-12 h-14 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <Calendar className="mr-2 h-5 w-5" />
-                  Submit Booking Request
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                      Submitting...
+                    </>
+                  ) : (
+                    <>
+                      <Calendar className="mr-2 h-5 w-5" />
+                      Submit Booking Request
+                    </>
+                  )}
                 </Button>
                 <Button
                   type="button"
                   size="lg"
                   variant="outline"
                   className="h-14 px-12 text-lg"
+                  disabled={isSubmitting}
                   onClick={() => window.history.back()}
                 >
                   Cancel
                 </Button>
               </div>
 
-              <p className="text-center text-sm text-muted-foreground mt-6">
+              <p className="text-center text-sm text-foreground mt-6">
                 By submitting this form, you agree to our terms of service and privacy policy.
               </p>
             </form>
@@ -481,7 +565,7 @@ const Booking = () => {
             <h2 className="font-serif text-3xl font-bold mb-4">
               Need Help Booking?
             </h2>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-foreground mb-6">
               If you have any questions or prefer to book over the phone, our team is here to assist you.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
