@@ -92,7 +92,6 @@ const Booking = () => {
         { duration: 6000 }
       );
 
-      // Reset form
       setFormData({
         firstName: "",
         lastName: "",

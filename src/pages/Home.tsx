@@ -2,6 +2,9 @@ import ServicesSection from "@/components/Services";
 import TestimonialsSection from "@/components/Testimonials";
 import EnquiryForm from "@/components/GeneralEnquiryForm";
 import CTASection from "@/components/CallToAction";
+import HeroCarousel from "@/components/HeroCarousel";
+import WhyChooseUsSection from "@/components/WhyChooseUs";
+import BlogComponent from "@/components/BlogPost";
 import heroImage from "@/assets/hero-image.jpg";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -16,72 +19,10 @@ const Home = () => {
     { number: "99.8%", label: "Excellence Rate", icon: TrendingUp },
   ];
 
-  const whyChooseUs = [
-    {
-      icon: Shield,
-      title: "Safe & Evidence-Based",
-      description: "Our practices are grounded in the latest research and clinical guidelines for optimal outcomes."
-    },
-    {
-      icon: Heart,
-      title: "Holistic Approach",
-      description: "We care for your physical, emotional, and mental wellbeing throughout your journey."
-    },
-    {
-      icon: Users,
-      title: "Family-Centered",
-      description: "Your partner and family are welcomed and encouraged to participate in your care."
-    },
-    {
-      icon: CheckCircle,
-      title: "Continuity of Care",
-      description: "Build a relationship with your midwife from pregnancy through postpartum."
-    },
-  ];
-
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-[700px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img src={heroImage} alt="Hero" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-black/50" />
-        </div>
-
-        <div className="container mx-auto px-4 relative z-20 text-center">
-          <h1 className="font-serif text-5xl md:text-7xl font-bold text-white leading-tight mb-8">
-            Empowering Motherhood, <span className="text-primary">Nurturing Families</span>
-          </h1>
-
-          <p className="text-xl text-white/85 max-w-2xl mx-auto mb-8">
-            Experience personalized, evidence-based midwifery care for pregnancy, birth and beyond.
-          </p>
-
-          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
-            <Button asChild size="lg" className="bg-primary text-white hover:bg-primary/90">
-              <Link to="/booking">Book Consultation</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="text-black border-white/40 hover:bg-white/10">
-              <Link to="/services">Explore Services</Link>
-            </Button>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-6 md:gap-8 text-white/80 text-sm md:text-base">
-            <div className="flex items-center gap-2">
-              <Award className="h-5 w-5 text-primary" />
-              <span className="text-white">Certified Midwives</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Heart className="h-5 w-5 text-primary" />
-              <span className="text-white">Personalized Care</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock className="h-5 w-5 text-primary" />
-              <span className="text-white">24/7 Support</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroCarousel />
 
       {/* Impact Story Section */}
       <section className="py-20 bg-gradient-to-b from-white to-light-sage">
@@ -135,37 +76,9 @@ const Home = () => {
           </div>
         </div>
       </section>
-
+      <BlogComponent />
       {/* Why Choose Us Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">
-              Why Families Choose Us
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Our approach combines clinical excellence with compassionate, individualized care
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {whyChooseUs.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <div key={index} className="text-center group">
-                  <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-primary/5 flex items-center justify-center group-hover:bg-primary/10 transition-colors duration-300">
-                    <Icon className="h-10 w-10 text-primary" />
-                  </div>
-                  <h3 className="font-serif text-xl font-semibold mb-3">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {item.description}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      < WhyChooseUsSection />
 
       {/* Services Section */}
       <ServicesSection />
