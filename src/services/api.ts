@@ -315,4 +315,51 @@ export const api = {
 
     return response.json();
   },
+
+  getBlogPost: async (slug: string) => {
+    const response = await fetch(`/api/blog/posts/${slug}/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch blog post');
+    }
+
+    return response.json();
+  },
+
+  // Your existing searchBlogPosts method should remain
+  searchBlogPosts: async (params: any) => {
+    const queryParams = new URLSearchParams();
+    
+    if (params.page_size) {
+      queryParams.append('page_size', params.page_size.toString());
+    }
+    if (params.category) {
+      queryParams.append('category', params.category);
+    }
+    if (params.tag) {
+      queryParams.append('tag', params.tag);
+    }
+    if (params.search) {
+      queryParams.append('search', params.search);
+    }
+
+    const response = await fetch(`/api/blog/posts/?${queryParams.toString()}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch blog posts');
+    }
+
+    return response.json();
+  },
+
 };

@@ -42,166 +42,6 @@ const BlogComponent = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
-  // Mock data - will be replaced with actual API call
-  const mockPosts: BlogPost[] = [
-    {
-      id: 1,
-      title: "Understanding Prenatal Care: A Comprehensive Guide",
-      slug: "understanding-prenatal-care",
-      excerpt: "Discover the essential aspects of prenatal care and how it supports a healthy pregnancy journey for both mother and baby.",
-      content: "Full content here...",
-      featured_image: "/api/placeholder/800/500",
-      author: {
-        id: 1,
-        name: "Dr. Sarah Johnson",
-        avatar: "/api/placeholder/100/100"
-      },
-      category: {
-        id: 1,
-        name: "Pregnancy",
-        slug: "pregnancy"
-      },
-      tags: [
-        { id: 1, name: "Prenatal Care", slug: "prenatal-care" },
-        { id: 2, name: "Health Tips", slug: "health-tips" }
-      ],
-      published_date: "2024-03-15",
-      reading_time: 8,
-      is_featured: true,
-      views_count: 1250
-    },
-    {
-      id: 2,
-      title: "Natural Birth: What to Expect and How to Prepare",
-      slug: "natural-birth-guide",
-      excerpt: "Learn about natural birth methods, pain management techniques, and how to create your ideal birth plan.",
-      content: "Full content here...",
-      featured_image: "/api/placeholder/800/500",
-      author: {
-        id: 2,
-        name: "Emily Rodriguez",
-        avatar: "/api/placeholder/100/100"
-      },
-      category: {
-        id: 2,
-        name: "Birth",
-        slug: "birth"
-      },
-      tags: [
-        { id: 3, name: "Natural Birth", slug: "natural-birth" },
-        { id: 4, name: "Birth Planning", slug: "birth-planning" }
-      ],
-      published_date: "2024-03-10",
-      reading_time: 10,
-      is_featured: false,
-      views_count: 980
-    },
-    {
-      id: 3,
-      title: "Postpartum Recovery: Self-Care Tips for New Mothers",
-      slug: "postpartum-recovery-tips",
-      excerpt: "Essential self-care strategies and recovery tips to help you navigate the postpartum period with confidence.",
-      content: "Full content here...",
-      featured_image: "/api/placeholder/800/500",
-      author: {
-        id: 1,
-        name: "Dr. Sarah Johnson",
-        avatar: "/api/placeholder/100/100"
-      },
-      category: {
-        id: 3,
-        name: "Postpartum",
-        slug: "postpartum"
-      },
-      tags: [
-        { id: 5, name: "Recovery", slug: "recovery" },
-        { id: 6, name: "Self-Care", slug: "self-care" }
-      ],
-      published_date: "2024-03-05",
-      reading_time: 6,
-      is_featured: true,
-      views_count: 1450
-    },
-    {
-      id: 4,
-      title: "Breastfeeding Basics: A Guide for First-Time Mothers",
-      slug: "breastfeeding-basics",
-      excerpt: "Everything you need to know about breastfeeding, from latch techniques to common challenges and solutions.",
-      content: "Full content here...",
-      featured_image: "/api/placeholder/800/500",
-      author: {
-        id: 3,
-        name: "Jennifer Martinez",
-        avatar: "/api/placeholder/100/100"
-      },
-      category: {
-        id: 3,
-        name: "Postpartum",
-        slug: "postpartum"
-      },
-      tags: [
-        { id: 7, name: "Breastfeeding", slug: "breastfeeding" },
-        { id: 8, name: "Newborn Care", slug: "newborn-care" }
-      ],
-      published_date: "2024-02-28",
-      reading_time: 7,
-      is_featured: false,
-      views_count: 1120
-    },
-    {
-      id: 5,
-      title: "Mental Health During Pregnancy: Support and Resources",
-      slug: "mental-health-pregnancy",
-      excerpt: "Understanding and addressing mental health concerns during pregnancy with expert guidance and support.",
-      content: "Full content here...",
-      featured_image: "/api/placeholder/800/500",
-      author: {
-        id: 2,
-        name: "Emily Rodriguez",
-        avatar: "/api/placeholder/100/100"
-      },
-      category: {
-        id: 1,
-        name: "Pregnancy",
-        slug: "pregnancy"
-      },
-      tags: [
-        { id: 9, name: "Mental Health", slug: "mental-health" },
-        { id: 10, name: "Wellness", slug: "wellness" }
-      ],
-      published_date: "2024-02-20",
-      reading_time: 9,
-      is_featured: false,
-      views_count: 890
-    },
-    {
-      id: 6,
-      title: "Creating Your Birth Plan: A Step-by-Step Guide",
-      slug: "creating-birth-plan",
-      excerpt: "Learn how to create a comprehensive birth plan that reflects your preferences and priorities for labor and delivery.",
-      content: "Full content here...",
-      featured_image: "/api/placeholder/800/500",
-      author: {
-        id: 1,
-        name: "Dr. Sarah Johnson",
-        avatar: "/api/placeholder/100/100"
-      },
-      category: {
-        id: 2,
-        name: "Birth",
-        slug: "birth"
-      },
-      tags: [
-        { id: 4, name: "Birth Planning", slug: "birth-planning" },
-        { id: 2, name: "Health Tips", slug: "health-tips" }
-      ],
-      published_date: "2024-02-15",
-      reading_time: 5,
-      is_featured: false,
-      views_count: 760
-    }
-  ];
-
   const categories = [
     { id: 'all', name: 'All Posts' },
     { id: 'pregnancy', name: 'Pregnancy' },
@@ -217,12 +57,14 @@ const BlogComponent = () => {
     try {
       setLoading(true);
       const response = await api.searchBlogPosts({
-        page_size: 50
+        page_size: 100 // Increased to fetch more posts
       });
       setPosts(response.results);
       setFilteredPosts(response.results);
     } catch (error) {
       console.error('Error fetching blog posts:', error);
+      setPosts([]);
+      setFilteredPosts([]);
     } finally {
       setLoading(false);
     }
@@ -253,8 +95,20 @@ const BlogComponent = () => {
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   };
 
+  // Optimize image URL by adding size parameters if your backend supports it
+  const getOptimizedImageUrl = (url: string, width: number = 800) => {
+    if (!url) return null;
+    // If your backend supports image resizing, append parameters
+    // Adjust this based on your backend's image optimization capabilities
+    return url.includes('?') ? `${url}&w=${width}` : `${url}?w=${width}`;
+  };
+
+  // Get the first featured post to display prominently
   const featuredPost = filteredPosts.find(post => post.is_featured);
-  const regularPosts = filteredPosts.filter(post => !post.is_featured);
+  // Show ALL other posts (including other featured posts if any)
+  const regularPosts = featuredPost 
+    ? filteredPosts.filter(post => post.id !== featuredPost.id)
+    : filteredPosts;
 
   if (loading) {
     return (
@@ -321,19 +175,30 @@ const BlogComponent = () => {
         {featuredPost && (
           <div className="mb-16 animate-fadeIn">
             <Card className="overflow-hidden border-none shadow-xl hover:shadow-2xl transition-all duration-500 group">
-              <div className="grid md:grid-cols-2 gap-0">
-                <div className="relative overflow-hidden h-64 md:h-auto">
-                  <img
-                    src={featuredPost.featured_image}
-                    alt={featuredPost.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute top-4 left-4 bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold">
-                    Featured
+              <div className={`grid ${featuredPost.featured_image ? 'md:grid-cols-2' : 'md:grid-cols-1'} gap-0`}>
+                {featuredPost.featured_image && (
+                  <div className="relative overflow-hidden h-64 md:h-auto">
+                    <img
+                      src={getOptimizedImageUrl(featuredPost.featured_image, 800)}
+                      alt={featuredPost.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      loading="lazy"
+                    />
+                    <div className="absolute top-4 left-4 bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold">
+                      Featured
+                    </div>
                   </div>
-                </div>
+                )}
 
                 <CardContent className="p-8 flex flex-col justify-center">
+                  {!featuredPost.featured_image && (
+                    <div className="mb-4">
+                      <span className="bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold inline-block">
+                        Featured
+                      </span>
+                    </div>
+                  )}
+                  
                   <div className="flex items-center gap-3 mb-4">
                     <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold">
                       {featuredPost.category.name}
@@ -354,11 +219,14 @@ const BlogComponent = () => {
 
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-3">
-                      <img
-                        src={featuredPost.author.avatar}
-                        alt={featuredPost.author.name}
-                        className="w-10 h-10 rounded-full object-cover"
-                      />
+                      {featuredPost.author.avatar && (
+                        <img
+                          src={featuredPost.author.avatar}
+                          alt={featuredPost.author.name}
+                          className="w-10 h-10 rounded-full object-cover"
+                          loading="lazy"
+                        />
+                      )}
                       <div>
                         <p className="font-semibold text-sm">{featuredPost.author.name}</p>
                         <div className="flex items-center gap-1 text-xs text-muted-foreground">
@@ -389,26 +257,37 @@ const BlogComponent = () => {
                 key={post.id}
                 onMouseEnter={() => setHoveredCard(post.id)}
                 onMouseLeave={() => setHoveredCard(null)}
-                className="overflow-hidden border-none shadow-lg hover:shadow-2xl transition-all duration-500 group cursor-pointer animate-fadeIn"
+                className="overflow-hidden border-none shadow-lg hover:shadow-2xl transition-all duration-500 group cursor-pointer animate-fadeIn flex flex-col"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="relative overflow-hidden h-56">
-                  <img
-                    src={post.featured_image}
-                    alt={post.title}
-                    className={`w-full h-full object-cover transition-transform duration-700 ${
-                      hoveredCard === post.id ? 'scale-110' : 'scale-100'
-                    }`}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-primary text-white rounded-full text-xs font-semibold">
-                      {post.category.name}
-                    </span>
+                {post.featured_image && (
+                  <div className="relative overflow-hidden h-56">
+                    <img
+                      src={getOptimizedImageUrl(post.featured_image, 600)}
+                      alt={post.title}
+                      className={`w-full h-full object-cover transition-transform duration-700 ${
+                        hoveredCard === post.id ? 'scale-110' : 'scale-100'
+                      }`}
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute top-4 left-4">
+                      <span className="px-3 py-1 bg-primary text-white rounded-full text-xs font-semibold">
+                        {post.category.name}
+                      </span>
+                    </div>
                   </div>
-                </div>
+                )}
 
-                <CardContent className="p-6">
+                <CardContent className={`${post.featured_image ? 'p-6' : 'p-6 pt-8'} flex-1 flex flex-col`}>
+                  {!post.featured_image && (
+                    <div className="mb-3">
+                      <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold inline-block">
+                        {post.category.name}
+                      </span>
+                    </div>
+                  )}
+
                   <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
                     <Calendar className="h-4 w-4" />
                     <span>{formatDate(post.published_date)}</span>
@@ -418,17 +297,20 @@ const BlogComponent = () => {
                     {post.title}
                   </h3>
 
-                  <p className="text-muted-foreground text-sm mb-4 line-clamp-3 leading-relaxed">
+                  <p className="text-muted-foreground text-sm mb-4 line-clamp-3 leading-relaxed flex-1">
                     {post.excerpt}
                   </p>
 
                   <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                     <div className="flex items-center gap-2">
-                      <img
-                        src={post.author.avatar}
-                        alt={post.author.name}
-                        className="w-8 h-8 rounded-full object-cover"
-                      />
+                      {post.author.avatar && (
+                        <img
+                          src={post.author.avatar}
+                          alt={post.author.name}
+                          className="w-8 h-8 rounded-full object-cover"
+                          loading="lazy"
+                        />
+                      )}
                       <span className="text-sm font-medium">{post.author.name}</span>
                     </div>
                     <div className="flex items-center gap-1 text-xs text-muted-foreground">
@@ -452,8 +334,28 @@ const BlogComponent = () => {
             ))}
           </div>
         ) : (
+          // Only show "no blogs" message when there are posts but filtering removed them all
+          filteredPosts.length === 0 && posts.length > 0 && (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground text-lg">No articles found matching your criteria.</p>
+              <Button
+                variant="outline"
+                className="mt-4"
+                onClick={() => {
+                  setSearchQuery('');
+                  setSelectedCategory('all');
+                }}
+              >
+                Clear Filters
+              </Button>
+            </div>
+          )
+        )}
+
+        {/* Show when there are truly no posts at all */}
+        {posts.length === 0 && !loading && (
           <div className="text-center py-12">
-            <p className="text-muted-foreground text-lg">No articles found matching your criteria.</p>
+            <p className="text-muted-foreground text-lg">No articles available at the moment.</p>
           </div>
         )}
 
