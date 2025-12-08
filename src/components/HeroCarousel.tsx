@@ -19,25 +19,25 @@ const HeroCarousel = () => {
       title: "Empowering Motherhood,",
       highlight: "Nurturing Families",
       description: "Experience personalized, evidence-based midwifery care for pregnancy, birth and beyond.",
-      image: "/src/assets/hero1.jpg"
+      image: "/assets/hero1.jpg"
     },
     {
       title: "Your Birth,",
       highlight: "Your Choice",
       description: "Supporting natural births with compassionate care and expert guidance throughout your journey.",
-      image: "/src/assets/hero2.jpg"
+      image: "/assets/hero2.jpg"
     },
     {
       title: "Holistic Care for",
       highlight: "Every Stage",
       description: "From prenatal care to postpartum support, we're with you every step of the way.",
-      image: "/src/assets/hero3.jpg"
+      image: "/assets/hero3.jpg"
     },
     {
       title: "Building Confidence,",
       highlight: "Creating Connections",
       description: "Join our community of empowered mothers and receive 24/7 support from certified professionals.",
-      image: "/api/placeholder/1920/1080"
+      image: "/assets/hero2.jpg"
     }
   ];
 

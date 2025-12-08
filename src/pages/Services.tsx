@@ -3,9 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Link } from "react-router-dom";
 import { Heart, Baby, Users, Stethoscope, Calendar, BookOpen, UserCheck, CheckCircle } from "lucide-react";
-import prenatalImage from "@/assets/prenatal-care.jpg";
-import postpartumImage from "@/assets/postpartum.jpg";
-import consultationImage from "@/assets/consultation.jpg";
+import prenatalImage from "/assets/prenatal-care.jpg";
+import postpartumImage from "/assets/postpartum.jpg";
+import consultationImage from "/assets/consultation.jpg";
 
 const Services = () => {
   const mainServices = [

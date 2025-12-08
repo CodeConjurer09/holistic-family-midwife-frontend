@@ -5,7 +5,7 @@ import CTASection from "@/components/CallToAction";
 import HeroCarousel from "@/components/HeroCarousel";
 import WhyChooseUsSection from "@/components/WhyChooseUs";
 import BlogComponent from "@/components/BlogPost";
-import heroImage from "@/assets/hero-image.jpg";
+import heroImage from "/assets/hero-image.jpg";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";

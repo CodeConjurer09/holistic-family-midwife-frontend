@@ -2,8 +2,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Award, Heart, Users, Target, Globe, Sparkles, BookOpen, Shield, TrendingUp, Home } from "lucide-react";
 import EnquiryForm from "@/components/GeneralEnquiryForm";
-import heroImage from "@/assets/hero-image.jpg";
-import consultationImage from "@/assets/consultation.jpg";
+import heroImage from "/assets/hero-image.jpg";
+import consultationImage from "/assets/consultation.jpg";
 import { Link } from "react-router-dom";
 
 const About = () => {

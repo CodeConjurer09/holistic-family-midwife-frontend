@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 
 import { Heart, Users, Baby, Stethoscope, Calendar, BookOpen, UserCheck } from "lucide-react";
 
-import prenatalImage from "@/assets/prenatal-care.jpg";
-import consultationImage from "@/assets/consultation.jpg";
-import postpartumImage from "@/assets/postpartum.jpg";
-import placeholderImage from "@/assets/rangerover.jpg";
+import prenatalImage from "/assets/prenatal-care.jpg";
+import consultationImage from "/assets/consultation.jpg";
+import postpartumImage from "/assets/postpartum.jpg";
+import placeholderImage from "/assets/rangerover.jpg";
 
 interface Service {
   title: string;
