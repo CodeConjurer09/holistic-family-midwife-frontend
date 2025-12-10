@@ -17,7 +17,7 @@ const CTASection = () => {
     },
     {
       tag: "We're Always Here",
-      title: "24/7 Support When You Need It",
+      title: "Support When You Need It",
       question: "Have an urgent question or concern?",
       description: "Day or night, our dedicated team is available to provide the guidance and reassurance you need during your maternal health journey.",
       icon: Phone,

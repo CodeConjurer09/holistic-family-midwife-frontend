@@ -34,10 +34,10 @@ const HeroCarousel = () => {
       image: "/assets/hero3.jpg"
     },
     {
-      title: "Building Confidence,",
-      highlight: "Creating Connections",
-      description: "Join our community of empowered mothers and receive 24/7 support from certified professionals.",
-      image: "/assets/hero2.jpg"
+      title: "Empowering Young Minds,",
+      highlight: "Guiding Futures",
+      description: "Educating, mentoring, and supporting young people with knowledge, confidence, and life skills for a healthier tomorrow.",
+      image: "/assets/hero4.jpg"
     }
   ];
 
@@ -77,8 +77,8 @@ const HeroCarousel = () => {
             key={index}
             className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
               index === currentSlide
-                ? 'opacity-100 scale-100'
-                : 'opacity-0 scale-105'
+                ? 'opacity-100 scale-100 z-10'
+                : 'opacity-0 scale-105 z-0 pointer-events-none'
             }`}
           >
             <div className="absolute inset-0 z-0">
@@ -123,7 +123,7 @@ const HeroCarousel = () => {
                   <Button asChild size="lg" className="bg-primary text-white hover:bg-primary/90">
                     <Link to="/booking">Book Consultation</Link>
                   </Button>
-                  <Button asChild size="lg" variant="outline" className="text-black border-white/40 hover:bg-white/10">
+                  <Button asChild size="lg" variant="outline" className="text-black border-white/40 hover:bg-white/10 hover:text-white">
                     <Link to="/services">Explore Services</Link>
                   </Button>
                 </div>
@@ -145,7 +145,7 @@ const HeroCarousel = () => {
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock className="h-5 w-5 text-primary" />
-                    <span className="text-white">24/7 Support</span>
+                    <span className="text-white">Support on  maternal care</span>
                   </div>
                 </div>
               </div>

@@ -76,13 +76,10 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <ServicesSection />
       <BlogComponent />
       {/* Why Choose Us Section */}
       < WhyChooseUsSection />
-
-      {/* Services Section */}
-      <ServicesSection />
-
       {/* Birth Philosophy Section */}
       <section className="py-20 bg-card">
         <div className="container mx-auto px-4">

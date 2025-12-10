@@ -72,7 +72,7 @@ const EnquiryForm = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="Jane Kimani" 
+                    placeholder="Enter your name..." 
                     required
                     disabled={isSubmitting}
                     className="h-12"
@@ -88,7 +88,7 @@ const EnquiryForm = () => {
                     type="tel" 
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder="+254700000000" 
+                    placeholder="07..." 
                     required
                     disabled={isSubmitting}
                     className="h-12"
@@ -106,7 +106,7 @@ const EnquiryForm = () => {
                   type="email" 
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="jane@example.com" 
+                  placeholder="Enter your email..." 
                   required
                   disabled={isSubmitting}
                   className="h-12"

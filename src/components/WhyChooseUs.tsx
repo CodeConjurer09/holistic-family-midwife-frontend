@@ -59,7 +59,7 @@ const WhyChooseUsSection = () => {
           <div className="w-full lg:w-1/3">
             <div className="relative rounded-2xl overflow-hidden shadow-xl">
               <img 
-                src="/src/assets/why.png" 
+                src="/assets/why.png" 
                 alt="Why Choose Us" 
                 className="w-full h-full object-cover"
               />

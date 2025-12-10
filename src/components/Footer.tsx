@@ -169,12 +169,6 @@ const Footer = () => {
                 <span>Sunday:</span>
                 <span className="text-muted-foreground">Closed</span>
               </p>
-              <div className="pt-3 mt-3 border-t border-border">
-                <p className="text-primary font-bold flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                  24/7 Emergency Support
-                </p>
-              </div>
             </div>
           </div>
         </div>
@@ -218,7 +212,7 @@ const Footer = () => {
               <span>Designed & Developed by</span>
 
               <a
-                href="https://wa.me/254700000000"
+                href="https://wa.me/254727585038"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-whatsapp/10 hover:bg-whatsapp text-foreground hover:text-white transition-all duration-300 hover:scale-105 hover:shadow-lg font-semibold group"

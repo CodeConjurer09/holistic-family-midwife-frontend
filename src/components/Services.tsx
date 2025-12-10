@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import { Heart, Users, Baby, Stethoscope, Calendar, BookOpen, UserCheck } from "lucide-react";
 
 import prenatalImage from "/assets/prenatal-care.jpg";
-import consultationImage from "/assets/consultation.jpg";
+import consultationImage from "/assets/consultations.jpg";
 import postpartumImage from "/assets/postpartum.jpg";
-import placeholderImage from "/assets/rangerover.jpg";
+import placeholderImage from "/assets/hero4.jpg";
 
 interface Service {
   title: string;
@@ -29,6 +29,12 @@ const ServicesSection = () => {
       description: "Expert guidance and personalized advice for all your maternal health questions",
       image: consultationImage,
       icon: Stethoscope,
+    },
+    {
+      title: "Teenage Empowerment",
+      description: "Reproductive health education and empowerment programs",
+      image: placeholderImage,
+      icon: BookOpen,
     },
     {
       title: "Postpartum Care & Follow-Up",
@@ -53,12 +59,6 @@ const ServicesSection = () => {
       description: "Comprehensive childbirth education and preparation classes",
       image: placeholderImage,
       icon: UserCheck,
-    },
-    {
-      title: "Teenage Empowerment",
-      description: "Reproductive health education and empowerment programs",
-      image: placeholderImage,
-      icon: BookOpen,
     },
   ];
 
