@@ -64,7 +64,7 @@ const ContactForm = () => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              placeholder="Jane Kimani" 
+              placeholder="Enter your name..."
               required 
               disabled={isSubmitting}
               className="h-12"
@@ -82,7 +82,7 @@ const ContactForm = () => {
                 type="email" 
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="jane@example.com" 
+                placeholder="Enter your email..."
                 required 
                 disabled={isSubmitting}
                 className="h-12"

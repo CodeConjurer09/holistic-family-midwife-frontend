@@ -576,10 +576,6 @@ const Services = () => {
                     <CardDescription className="text-base leading-relaxed">{service.description}</CardDescription>
                   </CardHeader>
                   <CardContent className="text-center">
-                    <Button variant="ghost" className="group/btn">
-                      Learn More
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </Button>
                   </CardContent>
                 </Card>
               );

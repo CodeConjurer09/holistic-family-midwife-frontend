@@ -181,7 +181,7 @@ const Booking = () => {
                         name="firstName"
                         value={formData.firstName}
                         onChange={handleChange}
-                        placeholder="Jane"
+                        placeholder="Enter your first name..."
                         required
                         disabled={isSubmitting}
                         className="h-12"
@@ -196,7 +196,7 @@ const Booking = () => {
                         name="lastName"
                         value={formData.lastName}
                         onChange={handleChange}
-                        placeholder="Kimani"
+                        placeholder="Enter your second name..."
                         required
                         disabled={isSubmitting}
                         className="h-12"
@@ -216,7 +216,7 @@ const Booking = () => {
                         type="email"
                         value={formData.email}
                         onChange={handleChange}
-                        placeholder="jane@example.com"
+                        placeholder="Enter your email..."
                         required
                         disabled={isSubmitting}
                         className="h-12"
@@ -233,7 +233,7 @@ const Booking = () => {
                         type="tel"
                         value={formData.phone}
                         onChange={handleChange}
-                        placeholder="+254700000000"
+                        placeholder="Enter your mobile number, eg 07..."
                         required
                         disabled={isSubmitting}
                         className="h-12"
@@ -251,7 +251,7 @@ const Booking = () => {
                       name="address"
                       value={formData.address}
                       onChange={handleChange}
-                      placeholder="Street address, city"
+                      placeholder="Enter your location"
                       required
                       disabled={isSubmitting}
                       className="h-12"

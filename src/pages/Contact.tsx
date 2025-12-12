@@ -60,9 +60,6 @@ const Contact = () => {
                           >
                             (+254) 797 735 027
                           </a>
-                          <p className="text-sm text-foreground mt-1">
-                            24/7 emergency line available
-                          </p>
                         </div>
                       </div>
                     </CardContent>
@@ -124,10 +121,6 @@ const Contact = () => {
                             <p>Monday - Friday: 9:00 AM - 5:00 PM</p>
                             <p>Saturday: By Appointment Only</p>
                             <p>Sunday: Closed</p>
-                            <p className="text-primary font-bold pt-2 flex items-center gap-2">
-                              <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                              24/7 Emergency Support Available
-                            </p>
                           </div>
                         </div>
                       </div>
@@ -135,21 +128,6 @@ const Contact = () => {
                   </Card>
                 </div>
               </div>
-
-              {/* Emergency Notice */}
-              <Card className="shadow-lg bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
-                <CardContent className="pt-6">
-                  <h3 className="font-bold text-primary mb-2 text-lg">
-                    Emergency Situations
-                  </h3>
-                  <p className="text-sm text-foreground leading-relaxed">
-                    If you're experiencing a medical emergency, please call
-                    emergency services immediately. For urgent but
-                    non-emergency concerns after hours, call our 24/7 emergency
-                    line at (+254) 797 735 027.
-                  </p>
-                </CardContent>
-              </Card>
             </div>
           </div>
         </div>
